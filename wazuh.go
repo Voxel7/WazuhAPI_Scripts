@@ -19,7 +19,6 @@ type wazuhInstance struct {
 
 func getWazuhToken(instance wazuhInstance) string {
 	
-
 	req, err := http.NewRequest("GET", instance.addr+"security/user/authenticate?raw=true", nil)
 	if err != nil {
 	 log.Fatal(err)
@@ -83,16 +82,16 @@ func main(){
 	log.Println(wazuhGet(instance,"?pretty=true"))
 	case opt==2:
 	log.Println(wazuhGet(instance,"agents/summary/status?pretty=true"))
-	case opt==3:
+	case opt==3:{
 	var idrule string
 	fmt.Print("Enter ID of the rule you want to consult ")
-	fmt.Scanf("%d", &idrule)
-	log.Println(wazuhGet(instance,"rules?rule_ids="+idrule+"&pretty=true"))
-	case opt==4:
+	fmt.Scanf("%s", &idrule)
+	log.Println(wazuhGet(instance,"rules?rule_ids="+idrule+"&pretty=true"))}
+	case opt==4:{
 	var criteria string
 	fmt.Print("Enter criteria you want to consult ")
 	fmt.Scanf("%s", &criteria)
-	log.Println(wazuhGet(instance,"rules?pretty=true&limit=500&search=failures&group="+criteria+"&pci_dss=10.6.1"))
+	log.Println(wazuhGet(instance,"rules?pretty=true&limit=500&search=failures&group="+criteria+"&pci_dss=10.6.1"))}
 	case opt==5:
 	log.Println(wazuhGet(instance,"syscheck/000?pretty=true&search=.py"))
 	case opt==6:
